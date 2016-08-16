@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitHelpers": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "outDir": "./",
+    "preserveConstEnums": true,
+    "pretty": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "ES5",
+    "types": [
+    ]
+  }, 
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2
+  },
+   "files": [
+     "src/h.ts",
+     "src/htmldomapi.ts",
+     "src/index.ts",
+     "src/interfaces.ts",
+     "src/is.ts",
+     "src/thunk.ts",
+     "src/util.ts",
+     "src/vnode.ts",
+     "src/helpers/attachto.ts",
+     "src/helpers/hyperscript.ts",
+     "src/modules/attributes.ts",
+     "src/modules/class.ts",
+     "src/modules/dataset.ts",
+     "src/modules/eventlisteners.ts",
+     "src/modules/hero.ts",
+     "src/modules/props.ts",
+     "src/modules/style.ts"
+   ]
+}
