@@ -1,6 +1,5 @@
 import { VNode, Module } from '../interfaces'
 
-
 function updateClass(oldVnode: VNode, vnode: VNode) {
   let cur: any
   let name: string
