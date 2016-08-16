@@ -46,6 +46,14 @@
     "url": "https://github.com/TylorS/snabbdom-ts/issues"
   },
   "homepage": "https://github.com/TylorS/snabbdom-ts#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "node ./node_modules/.bin/validate-commit-msg"
+    }
+  },
   "devDependencies": {
     "@types/mocha": "^2.2.29",
     "@types/node": "^6.0.33",

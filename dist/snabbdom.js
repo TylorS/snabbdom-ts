@@ -263,12 +263,14 @@
                     newEndVnode = newCh[--newEndIdx];
                 }
                 else if (sameVNode(oldStartVnode, newEndVnode)) {
-                    patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue)(api).insertBefore(parentElm, oldStartVnode.elm, api.nextSibling(oldEndVnode.elm));
+                    patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
+                    api.insertBefore(parentElm, oldStartVnode.elm, api.nextSibling(oldEndVnode.elm));
                     oldStartVnode = oldCh[++oldStartIdx];
                     newEndVnode = newCh[--newEndIdx];
                 }
                 else if (sameVNode(oldEndVnode, newStartVnode)) {
-                    patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue)(api).insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm);
+                    patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
+                    api.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm);
                     oldEndVnode = oldCh[--oldEndIdx];
                     newStartVnode = newCh[++newStartIdx];
                 }
