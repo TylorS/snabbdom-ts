@@ -6,7 +6,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "clean": "rimraf h.* htmldomapi.* index.* interfaces.* is.* thunk.* util.* vnode.* helpers modules lib dist",
+    "clean": "rimraf h.* htmldomapi.* index.* interfaces.* is.* thunk.* util.* vnode.* helpers modules lib",
     "commit": "git-cz",
     "changelog": "conventional-changelog --infile CHANGELOG.md --same-file --release-count 0 --preset angular",
     "postchangelog": "git add CHANGELOG.md && git commit -m 'chore(CHANGELOG): append to changelog' && git push origin master",
