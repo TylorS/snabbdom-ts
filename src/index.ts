@@ -184,11 +184,14 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>) {
           elmToMove = oldCh[idxInOld]
           patchVnode(elmToMove as VNode, newStartVnode, insertedVnodeQueue)
           oldCh[idxInOld] = void 0;
-          (api as SnabbdomAPI<Element, Text, Node>).insertBefore(
-            parentElm,
-            (elmToMove as VNode).elm as Element,
-            (oldStartVnode as VNode).elm as Element
-          )
+          const newNode = elmToMove.elm;
+          const referenceNode = oldStartVnode.elm;
+          if (newNode !== referenceNode)
+            (api as SnabbdomAPI<Element, Text, Node>).insertBefore(
+              parentElm,
+              (elmToMove as VNode).elm as Element,
+              (oldStartVnode as VNode).elm as Element
+            )
           newStartVnode = newCh[++newStartIdx]
         }
       }
