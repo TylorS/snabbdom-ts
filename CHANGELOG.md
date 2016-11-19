@@ -1,3 +1,14 @@
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/TylorS/snabbdom-ts/compare/v0.0.1...v0.1.0) (2016-11-19)
+
+
+### Bug Fixes
+
+* **snabbdom:** ts fix ([250edc3](https://github.com/TylorS/snabbdom-ts/commit/250edc3))
+* **updateChildren:** fix bug ([8e567e7](https://github.com/TylorS/snabbdom-ts/commit/8e567e7))
+
+
+
 <a name="0.0.1"></a>
 ## [0.0.1](https://github.com/TylorS/snabbdom-ts/compare/v0.0.0...v0.0.1) (2016-08-16)
 
