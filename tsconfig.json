@@ -29,7 +29,8 @@
     "tabSize": 2
   },
   "include": [
-    "src/*.ts"
+    "src/*.ts",
+    "src/**/*.ts"
   ],
   "exclude": []
 }
