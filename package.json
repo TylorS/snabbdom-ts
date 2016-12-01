@@ -1,6 +1,6 @@
 {
   "name": "snabbdom-ts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A quick version of snabbdom written in Typescript (hopefully merged into mainline)",
   "jsnext:main": "index.js",
   "module": "index.js",
