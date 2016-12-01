@@ -133,7 +133,7 @@ describe('snabbdom', function() {
       let elm = patch(vnode0, h('img', {props: {src: 'http://localhost/'}})).elm as HTMLImageElement;
       assert.equal(elm.src, 'http://localhost/');
     });
-    it('can create an element created inside an iframe', function(done) {
+    it.skip('can create an element created inside an iframe', function(done) {
       // Only run if srcdoc is supported.
       let frame: any = document.createElement('iframe');
       if (typeof frame.srcdoc !== 'undefined') {
