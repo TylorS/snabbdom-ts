@@ -28,11 +28,11 @@ function appendChild(node: Element, child: Element | Text): void {
 }
 
 function parentNode(node: Element | Text): Element | Text {
-  return node.parentElement;
+  return node.parentElement as Element | Text;
 }
 
 function nextSibling(node: Element | Text): Node | Element {
-  return node.nextSibling;
+  return node.nextSibling as Node | Element;
 }
 
 function tagName(node: Element): string {

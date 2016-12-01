@@ -28,23 +28,8 @@
     "indentSize": 2,
     "tabSize": 2
   },
-   "files": [
-     "src/h.ts",
-     "src/htmldomapi.ts",
-     "src/index.ts",
-     "src/interfaces.ts",
-     "src/is.ts",
-     "src/thunk.ts",
-     "src/util.ts",
-     "src/vnode.ts",
-     "src/helpers/attachto.ts",
-     "src/helpers/hyperscript.ts",
-     "src/modules/attributes.ts",
-     "src/modules/class.ts",
-     "src/modules/dataset.ts",
-     "src/modules/eventlisteners.ts",
-     "src/modules/hero.ts",
-     "src/modules/props.ts",
-     "src/modules/style.ts"
-   ]
+  "include": [
+    "src/*.ts"
+  ],
+  "exclude": []
 }

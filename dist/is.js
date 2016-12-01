@@ -4,14 +4,14 @@
     (global.is = factory());
 }(this, (function () { 'use strict';
 
-    var is = {
-        array: Array.isArray,
-        primitive: function (x) {
-            return typeof x === 'string' || typeof x === 'number';
-        }
-    };
+var is = {
+    array: Array.isArray,
+    primitive: function (x) {
+        return typeof x === 'string' || typeof x === 'number';
+    }
+};
 
-    return is;
+return is;
 
 })));
 //# sourceMappingURL=is.js.map

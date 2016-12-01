@@ -25,7 +25,7 @@ function post(_: any, vnode: AttachVNode) {
 
 function destroy(vnode: AttachVNode) {
   // Remove placeholder
-  vnode.elm.parentElement.removeChild(vnode.elm)
+  (vnode.elm.parentElement as HTMLElement).removeChild(vnode.elm)
   // Remove real element from where it was inserted
   vnode.elm = vnode.data.attachData.real
 }
@@ -35,7 +35,7 @@ function create(_: any, vnode: AttachVNode) {
   const placeholder = document.createElement('span')
   // Replace actual element with dummy placeholder
   // Snabbdom will then insert placeholder instead
-  vnode.elm = placeholder
+  vnode.elm = placeholder as any as HTMLElement
   attachData.target.appendChild(real)
   attachData.real = real
   attachData.placeholder = placeholder
