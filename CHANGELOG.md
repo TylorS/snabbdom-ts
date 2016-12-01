@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/TylorS/snabbdom-ts/compare/v0.1.0...v0.1.1) (2016-12-01)
+
+
+### Features
+
+* **es2015:** make es2015 build the default ([40cb498](https://github.com/TylorS/snabbdom-ts/commit/40cb498))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/TylorS/snabbdom-ts/compare/v0.0.1...v0.1.0) (2016-11-19)
 
