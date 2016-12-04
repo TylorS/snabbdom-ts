@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "noEmitHelpers": false,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitThis": false,
     "noImplicitReturns": true,
     "noUnusedParameters": true,

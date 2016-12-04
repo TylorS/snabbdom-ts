@@ -1,11 +1,11 @@
-import { Module, SnabbdomAPI, VNode, VNodeData } from './interfaces'
+import { Module, SnabbdomAPI, VNode, VNodeData, SnabbdomVNode } from './interfaces'
 import is from './is'
 import domApi from './htmldomapi'
 import { isDef, isUndef, sameVNode, createKeyToOldIdx } from './util'
 
 const hooks: string[] = ['create', 'update', 'remove', 'destroy', 'pre', 'post']
 
-export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>) {
+export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (previous: VNode | Node, current: VNode) => VNode {
   let i: number
   let j: number
   let cbs: any = {}
@@ -21,7 +21,7 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>) {
   }
 
   function emptyNodeAt(elm: HTMLElement) {
-    return VNode.create((api as SnabbdomAPI<Element, Text, Node>).tagName(elm).toLowerCase(), {}, [], undefined, elm, undefined)
+    return SnabbdomVNode.create((api as SnabbdomAPI<Element, Text, Node>).tagName(elm).toLowerCase(), {}, [], undefined, elm, undefined)
   }
 
   function createRmCb(childElm: Element, listeners: number) {

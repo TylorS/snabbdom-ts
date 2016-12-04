@@ -1,4 +1,4 @@
-import { VNode, VNodeData } from './interfaces'
+import { VNode, VNodeData, SnabbdomVNode } from './interfaces'
 import is from './is'
 
 function addNS(data: VNodeData, children: Array<VNode | string | null>, selector: string): void {
@@ -46,7 +46,7 @@ const h: HyperscriptFn = <HyperscriptFn>function (selector: string, b?: any, c?:
     children = children.filter(Boolean)
     for (i = 0; i < children.length; ++i) {
       if (is.primitive(children[i])) {
-        children[i] = VNode.createTextVNode(String(children[i]) as string)
+        children[i] = SnabbdomVNode.createTextVNode(String(children[i]) as string)
       }
     }
   }
@@ -55,7 +55,7 @@ const h: HyperscriptFn = <HyperscriptFn>function (selector: string, b?: any, c?:
     addNS(data, children as Array<VNode | string | null>, selector)
   }
 
-  return VNode.create(selector, data, children, text, undefined, data && data.key)
+  return SnabbdomVNode.create(selector, data, children, text, undefined, data && data.key)
 }
 
 export default h
