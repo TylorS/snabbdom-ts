@@ -1,12 +1,12 @@
 import * as assert from 'assert'
 import fakeRaf from './helpers/fake-raf'
 import { init } from '../src/index'
-import h from '../src/h'
-import styleModule from '../src/modules/style'
+import { h } from '../src/h'
+import { StyleModule } from '../src/modules/style'
 
 fakeRaf.use();
 let patch = init([
-  styleModule
+  StyleModule
 ]);
 
 describe('style', function() {
@@ -57,7 +57,7 @@ describe('style', function() {
   });
   it('updates delayed styles in next frame', function() {
     let patch = init([
-      styleModule
+      StyleModule
     ]);
     let vnode1 = h('i', {style: {fontSize: '14px', delayed: {fontSize: '16px'}}});
     let vnode2 = h('i', {style: {fontSize: '18px', delayed: {fontSize: '20px'}}});

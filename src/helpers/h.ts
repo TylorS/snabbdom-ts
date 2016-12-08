@@ -1,5 +1,5 @@
-import { VNode, VNodeData, SnabbdomVNode } from './interfaces'
-import is from './is'
+import { VNode, VNodeData, VirtualNode, SnabbdomVNode } from '../interfaces'
+import is from '../is'
 
 function addNS(data: VNodeData, children: Array<VNode | string | null>, selector: string): void {
   data.ns = `http://www.w3.org/2000/svg`;
@@ -7,7 +7,7 @@ function addNS(data: VNodeData, children: Array<VNode | string | null>, selector
     for (let i = 0; i < children.length; ++i) {
         addNS((children[i] as VNode).data as VNodeData,
               (children[i] as VNode).children as Array<VNode | string>,
-              (children[i] as VNode).sel as string)
+              (children[i] as VNode).tagName as string)
     }
   }
 }
@@ -17,9 +17,13 @@ export interface HyperscriptFn {
   (sel: string, data: VNodeData): VNode
   (sel: string, children: string | number | Array<string | VNode | null>): VNode
   (sel: string, data: VNodeData, children: string | number | Array<string | VNode | null>): VNode
+  <T extends Node>(sel: string): VirtualNode<T>
+  <T extends Node>(sel: string, data: VNodeData): VirtualNode<T>
+  <T extends Node>(sel: string, children: string | number | Array<string | VNode | null>): VirtualNode<T>
+  <T extends Node>(sel: string, data: VNodeData, children: string | number | Array<string | VNode | null>): VirtualNode<T>
 }
 
-const h: HyperscriptFn = <HyperscriptFn>function (selector: string, b?: any, c?: any): VNode {
+export const h: HyperscriptFn = <HyperscriptFn>function (selector: string, b?: any, c?: any): VNode {
   let data: VNodeData = {}
   let children: Array<VNode | string | null> | undefined
   let text: string | undefined
@@ -51,11 +55,35 @@ const h: HyperscriptFn = <HyperscriptFn>function (selector: string, b?: any, c?:
     }
   }
 
-  if (selector[0] === 's' && selector[1] === 'v' && selector[2] === 'g') {
-    addNS(data, children as Array<VNode | string | null>, selector)
+  const { tagName, id, className } = parseSelector(selector);
+
+  if (tagName === 'svg') {
+    addNS(data, children as Array<VNode | string | null>, tagName)
   }
 
-  return SnabbdomVNode.create(selector, data, children, text, undefined, data && data.key)
+  return new SnabbdomVNode(tagName, className, id, data, children, text, undefined, data && data.key)
 }
 
-export default h
+function parseSelector(sel: string) {
+  // Parse selector
+  let hashIdx = sel.indexOf('#')
+  let dotIdx = sel.indexOf('.', hashIdx)
+  let hash = hashIdx > 0 ? hashIdx : sel.length
+  let dot = dotIdx > 0 ? dotIdx : sel.length
+
+  let tagName = hashIdx !== -1 || dotIdx !== -1
+    ? sel.slice(0, Math.min(hash, dot))
+    : sel
+
+  const id = sel.slice(hash + 1, dot) || void 0;
+
+  const className = dotIdx < sel.length &&  dotIdx > 0
+    ? sel.slice(dot + 1).replace(/\./g, ' ')
+    : void 0;
+
+  return {
+    tagName: tagName,
+    id,
+    className,
+  }
+}

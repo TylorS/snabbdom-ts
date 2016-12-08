@@ -66,42 +66,33 @@ export interface VNodeData {
 }
 
 export interface VirtualNode<T extends Node> {
-  sel: string | undefined
+  tagName: string | undefined
+  className: string | undefined
+  id: string | undefined
   data: VNodeData | undefined
-  children: Array<VNode | string | null> | undefined
+  children: VNodeChildren | undefined
   elm: T | undefined
   text: string | undefined
   key: string | number | undefined
 }
 
 export type VNode = VirtualNode<any>;
+export type VNodeChildren = Array<VNode | string | null>;
 
 export class SnabbdomVNode implements VNode {
-  public sel: string | undefined
-  public data: VNodeData | undefined
-  public children: Array<VNode | string | null> | undefined
-  public elm: HTMLElement | Text | undefined
-  public text: string | undefined
-  public key: string | number | undefined
-  constructor(selector: string | undefined, data: VNodeData | undefined,
-              children: Array<VNode | string | null> | undefined, text: string | undefined,
-              elm: HTMLElement | Text | undefined, key: string | number | undefined) {
-    this.sel = selector
-    this.data = data
-    this.children = children
-    this.text = text
-    this.elm = elm
-    this.key = key
-  }
-
-  static create(selector: string | undefined, data: VNodeData | undefined,
-                children: Array<VNode | string | null> | undefined, text: string | undefined,
-                elm: HTMLElement | Text | undefined, key: string | number | undefined) {
-    return new SnabbdomVNode(selector, data, children, text, elm, key)
+  constructor(
+    public tagName: string | undefined,
+    public className: string | undefined,
+    public id: string | undefined,
+    public data: VNodeData | undefined,
+    public children: Array<VNode | string | null> | undefined,
+    public text: string | undefined,
+    public elm: HTMLElement | Text | undefined,
+    public key: string | number | undefined) {
   }
 
   static createTextVNode(text: string) {
-    return new SnabbdomVNode(undefined, undefined, undefined, text, undefined, undefined)
+    return new SnabbdomVNode(undefined, undefined, undefined, undefined, undefined, text, undefined, undefined)
   }
 }
 
@@ -112,16 +103,17 @@ export interface ThunkData extends VNodeData {
 
 export class Thunk extends SnabbdomVNode {
   public data: ThunkData
-  constructor(selector: string | undefined, data: ThunkData,
-              children: Array<VNode | string | null> | undefined, text: string | undefined,
-              elm: HTMLElement | Text | undefined, key: string | number | undefined) {
-    super(selector, data, children, text, elm, key)
-  }
 
-  static create(selector: string | undefined, data: ThunkData,
-                children: Array<VNode | string | null> | undefined, text: string | undefined,
-                elm: HTMLElement | Text | undefined, key: string | number | undefined) {
-    return new Thunk(selector, data, children, text, elm, key)
+  constructor(
+    tagName: string | undefined,
+    className: string | undefined,
+    id: string | undefined,
+    data: ThunkData,
+    children: Array<VNode | string | null> | undefined,
+    text: string | undefined,
+    elm: HTMLElement | Text | undefined,
+    key: string | number | undefined) {
+    super(tagName, className, id, data, children, text, elm, key)
   }
 }
 

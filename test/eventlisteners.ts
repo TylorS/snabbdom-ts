@@ -1,10 +1,10 @@
 import * as assert from 'assert'
 import { init } from '../src/index'
-import events from '../src/modules/eventlisteners'
-import h from '../src/h'
+import { EventListenerModule } from '../src/modules/eventlisteners'
+import { h } from '../src/h'
 
 let patch = init([
-  events
+  EventListenerModule
 ]);
 
 describe('event listeners', function() {

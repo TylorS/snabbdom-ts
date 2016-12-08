@@ -9,7 +9,7 @@ export function isUndef(x: any): boolean {
 }
 
 export function sameVNode(vNode1: VNode, vNode2: VNode): boolean {
-  return vNode1.key === vNode2.key && vNode1.sel === vNode2.sel
+  return vNode1.key === vNode2.key && vNode1.tagName === vNode2.tagName
 }
 
 export function createKeyToOldIdx(children: VNode[], beginIdx: number, endIdx: number): any {

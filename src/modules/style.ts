@@ -71,17 +71,15 @@ function applyRemoveStyle(vnode: VNode, rm: () => void) {
   for (; i < props.length; ++i) {
     if (applied.indexOf(props[i]) !== -1) amount++
   }
-  elm.addEventListener('transitionend', function(ev) {
+  elm.addEventListener('transitionend', function(ev: Event) {
     if (ev.target === elm) --amount
     if (amount === 0) rm()
   })
 }
 
-const StyleModule: Module = {
+export const StyleModule: Module = {
   create: updateStyle,
   update: updateStyle,
   destroy: applyDestroyStyle,
   remove: applyRemoveStyle
 }
-
-export default StyleModule

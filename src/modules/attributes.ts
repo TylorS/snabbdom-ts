@@ -44,9 +44,7 @@ function updateAttrs(oldVnode: VNode, vnode: VNode) {
   }
 }
 
-const AttrsModule: Module = {
+export const AttrsModule: Module = {
   update: updateAttrs,
   create: updateAttrs,
 }
-
-export default AttrsModule

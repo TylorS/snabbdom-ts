@@ -176,11 +176,9 @@ function post() {
   created = []
 }
 
-const HeroModule: Module = {
+export const HeroModule: Module = {
   pre,
   create,
   destroy,
   post
 }
-
-export default HeroModule

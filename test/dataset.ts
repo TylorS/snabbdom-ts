@@ -1,11 +1,11 @@
 import * as assert from 'assert'
 import fakeRaf from './helpers/fake-raf'
 import { init } from '../src/index'
-import datasetModule from '../src/modules/dataset'
-import h from '../src/h'
+import { DatasetModule } from '../src/modules/dataset'
+import { h } from '../src/h'
 
 fakeRaf.use();
-const patch = init([ datasetModule ]);
+const patch = init([ DatasetModule ]);
 
 // doesnt work because jsdom does not support dataset
 describe.skip('dataset', function() {

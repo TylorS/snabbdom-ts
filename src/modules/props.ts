@@ -23,9 +23,7 @@ function updateProps(oldVnode: VNode, vnode: VNode) {
   }
 }
 
-const PropsModule: Module = {
+export const PropsModule: Module = {
   create: updateProps,
   update: updateProps
 }
-
-export default PropsModule

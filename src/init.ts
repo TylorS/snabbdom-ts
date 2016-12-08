@@ -21,11 +21,20 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (prev
   }
 
   function emptyNodeAt(elm: HTMLElement) {
-    return SnabbdomVNode.create((api as SnabbdomAPI<Element, Text, Node>).tagName(elm).toLowerCase(), {}, [], undefined, elm, undefined)
+    return new SnabbdomVNode(
+      (api as SnabbdomAPI<Element, Text, Node>).tagName(elm).toLowerCase(),
+      elm.className,
+      elm.id,
+      {},
+      [],
+      undefined,
+      elm,
+      undefined
+    )
   }
 
   function createRmCb(childElm: Element, listeners: number) {
-    return function() {
+    return function () {
       if (--listeners === 0) {
         const parent = (api as SnabbdomAPI<Element, Text, Node>).parentNode(childElm) as Element
         (api as SnabbdomAPI<Element, Text, Node>).removeChild(parent, childElm)
@@ -44,20 +53,16 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (prev
     }
     let elm: Element | Text
     let children = vnode.children
-    let sel: string = vnode.sel as string
-    if (isDef(sel)) {
-      // Parse selector
-      let hashIdx = sel.indexOf('#')
-      let dotIdx = sel.indexOf('.', hashIdx)
-      let hash = hashIdx > 0 ? hashIdx : sel.length
-      let dot = dotIdx > 0 ? dotIdx : sel.length
-      let tag = hashIdx !== -1 || dotIdx !== -1 ? sel.slice(0, Math.min(hash, dot)) : sel
-      elm = vnode.elm = isDef(data) && isDef(i = (data as VNodeData).ns)
-        ? (api as SnabbdomAPI<Element, Text, Node>).createElementNS(i, tag) as HTMLElement
-        : (api as SnabbdomAPI<Element, Text, Node>).createElement(tag) as HTMLElement
+    let tagName = vnode.tagName
 
-      if (hash < dot) elm.id = sel.slice(hash + 1, dot)
-      if (dotIdx > 0) elm.className = sel.slice(dot + 1).replace(/\./g, ' ')
+    if (isDef(tagName)) {
+      elm = vnode.elm = isDef(data) && isDef(i = (data as VNodeData).ns)
+        ? (api as SnabbdomAPI<Element, Text, Node>).createElementNS(i, tagName as string) as HTMLElement
+        : (api as SnabbdomAPI<Element, Text, Node>).createElement(tagName as string) as HTMLElement
+
+      if (vnode.id) elm.id = vnode.id
+      if (vnode.className) elm.className = vnode.className
+
       if (is.array(children)) {
         for (i = 0; i < children.length; ++i) {
           (api as SnabbdomAPI<Element, Text, Node>).appendChild(elm, createElm(children[i] as VNode, insertedVnodeQueue) as Element | Text)
@@ -77,8 +82,14 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (prev
     return vnode.elm
   }
 
-  function addVnodes(parentElm: Element, before: Element | Text | null, vnodes: VNode[],
-                     startIdx: number, endIdx: number, insertedVnodeQueue: VNode[]) {
+  function addVnodes(
+    parentElm: Element,
+    before: Element | Text | null,
+    vnodes: VNode[],
+    startIdx: number,
+    endIdx: number,
+    insertedVnodeQueue: VNode[]
+  ) {
     for (; startIdx <= endIdx; ++startIdx) {
       (api as SnabbdomAPI<Element, Text, Node>).insertBefore(parentElm, createElm(vnodes[startIdx], insertedVnodeQueue) as Element, before as Element)
     }
@@ -106,7 +117,7 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (prev
       let rm: () => void
       let ch = vnodes[startIdx]
       if (isDef(ch)) {
-        if (isDef(ch.sel)) {
+        if (isDef(ch.tagName)) {
           invokeDestroyHook(ch)
           listeners = cbs.remove.length + 1
           rm = createRmCb(ch.elm as Element, listeners)
@@ -246,7 +257,7 @@ export function init(modules: Module[], api?: SnabbdomAPI<any, any, any>): (prev
     let insertedVnodeQueue: VNode[] = []
     for (i = 0; i < cbs.pre.length; ++i) cbs.pre[i]()
 
-    if (isUndef((oldVNode as VNode).sel)) {
+    if (isUndef((oldVNode as VNode).elm)) {
       oldVNode = emptyNodeAt(oldVNode as HTMLElement)
     }
 

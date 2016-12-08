@@ -63,9 +63,7 @@ function updateEventListeners (oldVnode: VNode, vnode: VNode) {
   }
 }
 
-const EventListenerModule: Module = {
+export const EventListenerModule: Module = {
   create: updateEventListeners,
   update: updateEventListeners
 }
-
-export default EventListenerModule

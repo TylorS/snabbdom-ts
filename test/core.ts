@@ -2,17 +2,17 @@ import * as assert from 'assert'
 import { shuffle } from './helpers/shuffle'
 import { init, VNode } from '../src/index'
 
-import klassModule from '../src/modules/class'
-import propsModule from '../src/modules/props'
-import eventModule from '../src/modules/eventlisteners'
+import { ClassModule } from '../src/modules/class'
+import { PropsModule } from '../src/modules/props'
+import { EventListenerModule } from '../src/modules/eventlisteners'
 
 let patch = init([
-  klassModule,
-  propsModule,
-  eventModule
+  ClassModule,
+  PropsModule,
+  EventListenerModule,
 ]);
 
-import h from '../src/h'
+import { h } from '../src/h'
 
 function prop(name: string) {
   return function(obj: any): any {
@@ -46,14 +46,16 @@ describe('snabbdom', function() {
   });
   describe('hyperscript', function() {
     it('can create vnode with proper tag', function() {
-      assert.equal(h('div').sel, 'div');
-      assert.equal(h('a').sel, 'a');
+      assert.equal(h('div').tagName, 'div');
+      assert.equal(h('a').tagName, 'a');
     });
     it('can create vnode with children', function() {
       let vnode = h('div', [h('span#hello'), h('b.world')]);
-      assert.equal(vnode.sel, 'div');
-      assert.equal(getChild(vnode, 0).sel as string, 'span#hello');
-      assert.equal(getChild(vnode, 1).sel as string, 'b.world');
+      assert.equal(vnode.tagName, 'div');
+      assert.equal(getChild(vnode, 0).tagName as string, 'span');
+      assert.equal(getChild(vnode, 0).id as string, 'hello');
+      assert.equal(getChild(vnode, 1).tagName as string, 'b');
+      assert.equal(getChild(vnode, 1).className as string, 'world');
     });
     it('can create vnode with text content', function() {
       let vnode = h('a', ['I am a string']);
