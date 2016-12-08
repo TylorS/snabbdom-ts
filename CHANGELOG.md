@@ -1,3 +1,18 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/TylorS/snabbdom-ts/compare/v0.1.2...v0.1.3) (2016-12-08)
+
+
+### Bug Fixes
+
+* **snabbdom-ts:** fix commonjs and es2015 exports ([2a24307](https://github.com/TylorS/snabbdom-ts/commit/2a24307))
+
+
+### Features
+
+* **VNode:** improve vNode types ([0d00a1a](https://github.com/TylorS/snabbdom-ts/commit/0d00a1a))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/TylorS/snabbdom-ts/compare/v0.1.1...v0.1.2) (2016-12-01)
 
