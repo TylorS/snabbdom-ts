@@ -1,5 +1,7 @@
 # Snabbdom (TypeScript)
 
+This package is not going to be maintained any further, snabbdom itself is being rewritten in TypeScript.
+
 A virtual DOM library with focus on simplicity, modularity, powerful features
 and performance. Written in TypeScript
 
@@ -478,7 +480,7 @@ h('text', {
       y: yPos,
       dy: "5",
       class: 'text_class'
-    }}, 
+    }},
   text
 );
 ```
